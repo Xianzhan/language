@@ -1,0 +1,5 @@
+plugins {
+    id 'java'
+}
+
+description 'Java 语言基础特性'

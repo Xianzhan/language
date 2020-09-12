@@ -1,0 +1,39 @@
+plugins {
+    id 'java'
+}
+
+group 'xianzhan.java'
+version '1.0'
+description 'Java 语言特性或是一些通用代码'
+
+allprojects {
+    repositories {
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        jcenter()
+        mavenCentral()
+    }
+    // 指定编码格式
+    tasks.withType(JavaCompile) {
+        options.encoding = "UTF-8"
+    }
+
+    def enablePreview = '--enable-preview'
+    tasks.withType(JavaCompile).all {
+        options.compilerArgs += [enablePreview]
+    }
+    tasks.withType(JavaExec) {
+        jvmArgs += enablePreview
+    }
+    tasks.withType(Test).all {
+        jvmArgs += enablePreview
+    }
+}
+
+dependencies {
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.6.2'
+    testRuntime group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.6.2'
+}
+
+test {
+    useJUnitPlatform()
+}
