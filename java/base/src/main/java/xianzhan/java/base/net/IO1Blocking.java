@@ -14,7 +14,7 @@ import java.nio.charset.StandardCharsets;
  * @author xianzhan
  * @since 2020-09-20
  */
-public class IO1Block {
+public class IO1Blocking {
 
     public static void main(String[] args) throws IOException {
         ServerSocket ss = new ServerSocket(80);
