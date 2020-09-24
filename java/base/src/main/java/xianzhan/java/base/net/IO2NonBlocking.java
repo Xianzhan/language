@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.nio.ByteBuffer;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 import java.nio.charset.StandardCharsets;
@@ -36,21 +37,15 @@ public class IO2NonBlocking {
                 continue;
             }
 
-            Socket socket = sc.socket();
-            InputStream is = socket.getInputStream();
-            OutputStream os = socket.getOutputStream();
+            ByteBuffer buffer = ByteBuffer.allocate(8096);
+            sc.read(buffer);
+            buffer.flip();
+            String req = new String(buffer.array(), StandardCharsets.UTF_8);
+            System.out.println(req);
 
-            // 接收所有请求数据
-            byte[] bytes = new byte[8096];
-            // 会一直阻塞在 read() 方法这里
-            while ((is.read(bytes)) != -1) {
-                // request
-                String line = new String(bytes, StandardCharsets.UTF_8);
-                System.out.println(line);
-
-                // response
-                String response = "Hello world!";
-                String http = """
+            // response
+            String response = "Hello world!";
+            String http = """
                         HTTP/1.1 200 OK
                         Server: IO1Block
                         Content-Type: text/html; charset=utf-8
@@ -58,10 +53,9 @@ public class IO2NonBlocking {
                                             
                         %s
                         """.formatted(response.getBytes(StandardCharsets.UTF_8).length, response);
-                byte[] resBytes = http.getBytes(StandardCharsets.UTF_8);
-                os.write(resBytes);
-                os.flush();
-            }
+            byte[] resBytes = http.getBytes(StandardCharsets.UTF_8);
+            ByteBuffer resBuffer = ByteBuffer.wrap(resBytes);
+            sc.write(resBuffer);
 
             sc.close();
 
