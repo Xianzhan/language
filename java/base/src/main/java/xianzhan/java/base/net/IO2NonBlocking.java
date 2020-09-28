@@ -47,7 +47,7 @@ public class IO2NonBlocking {
             String response = "Hello world!";
             String http = """
                         HTTP/1.1 200 OK
-                        Server: IO1Block
+                        Server: IO2NonBlocking
                         Content-Type: text/html; charset=utf-8
                         Content-Length: %d
                                             
