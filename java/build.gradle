@@ -29,11 +29,15 @@ allprojects {
     }
 }
 
-dependencies {
-    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.6.2'
-    testRuntime group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.6.2'
-}
+subprojects {
+    apply plugin: 'java'
 
-test {
-    useJUnitPlatform()
+    dependencies {
+        testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.6.2'
+        testRuntime group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.6.2'
+    }
+
+    test {
+        useJUnitPlatform()
+    }
 }
