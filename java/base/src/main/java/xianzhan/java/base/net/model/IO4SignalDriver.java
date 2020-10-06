@@ -1,4 +1,4 @@
-package xianzhan.java.base.net;
+package xianzhan.java.base.net.model;
 
 import sun.misc.Signal;
 

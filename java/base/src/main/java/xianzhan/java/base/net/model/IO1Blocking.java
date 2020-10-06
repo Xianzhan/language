@@ -1,4 +1,4 @@
-package xianzhan.java.base.net;
+package xianzhan.java.base.net.model;
 
 import java.io.IOException;
 import java.io.InputStream;
