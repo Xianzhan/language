@@ -360,6 +360,10 @@ public final class Unsafe {
         return UNSAFE.getDouble(o, offset);
     }
 
+    public static void putDouble(Object o, long offset, double d) {
+        UNSAFE.putDouble(o, offset, d);
+    }
+
     /**
      * 在给定的内存块中设值
      *
