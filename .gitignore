@@ -37,3 +37,12 @@ hs_err_pid*
 
 # Eclipse
 **/.settings
+
+# VS Code
+.vscode
+
+# C
+*.exe
+*.i
+*.s
+*.o

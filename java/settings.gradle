@@ -2,4 +2,5 @@ rootProject.name = 'java'
 include 'base'
 include 'sensitive-words'
 include 'life-game'
+include 'http'
 
